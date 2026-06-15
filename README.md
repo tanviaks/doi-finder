@@ -1,7 +1,7 @@
 **FindMyDOI**
 Paste your reference list — get DOIs automatically.
 A free, browser-based tool that finds DOI (Digital Object Identifier) links for academic references using the Crossref API. No signup, no backend, no cost.
-Live site: `https://YOUR-USERNAME.github.io/doi-finder`
+Live site: `https://tanviaks.github.io/doi-finder`
 ---
 **What it does**
 Researchers and students often have to manually search and add DOIs to their reference lists before submitting manuscripts. This tool automates that process:
