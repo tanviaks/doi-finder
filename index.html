@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DOI Finder — Instant DOI lookup for your references</title>
+  <title>FindMyDOI — Instant DOI lookup for your references</title>
   <meta name="description" content="Paste your reference list and get DOIs automatically. Powered by Crossref — free, fast, and works with any citation format." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,27 +12,27 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0A1628;
-      --bg2:       #0F1E38;
-      --bg3:       #152440;
-      --border:    #1E3050;
-      --border2:   #243860;
-      --teal:      #00C9A7;
-      --teal-dim:  #009E84;
-      --teal-bg:   rgba(0,201,167,0.08);
-      --amber:     #FFB347;
-      --amber-bg:  rgba(255,179,71,0.08);
+      --bg:        #071A0F;
+      --bg2:       #0C2416;
+      --bg3:       #112D1C;
+      --border:    #1A4028;
+      --border2:   #225234;
+      --green:     #2ECC7A;
+      --green-dim: #25A362;
+      --green-bg:  rgba(46,204,122,0.08);
+      --amber:     #F0A500;
+      --amber-bg:  rgba(240,165,0,0.08);
       --red:       #FF6B6B;
       --red-bg:    rgba(255,107,107,0.08);
-      --text1:     #E8F0FE;
-      --text2:     #8BA4C8;
-      --text3:     #4D6A94;
+      --success:   #2ECC7A;
+      --text1:     #E8F5EE;
+      --text2:     #7DB894;
+      --text3:     #3D7A52;
       --mono:      'DM Mono', monospace;
       --sans:      'Inter', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text1);
@@ -42,7 +42,7 @@
       min-height: 100vh;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       display: flex;
       align-items: center;
@@ -51,569 +51,234 @@
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(10,22,40,0.92);
+      background: rgba(7,26,15,0.92);
       backdrop-filter: blur(12px);
       z-index: 100;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--teal);
+      width: 34px; height: 34px;
+      background: var(--green);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--bg);
-      letter-spacing: -1px;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-weight: 500; font-size: 12px;
+      color: var(--bg); letter-spacing: -0.5px; flex-shrink: 0;
     }
-    .logo-text {
-      font-family: var(--mono);
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--text1);
-      letter-spacing: 0.02em;
-    }
+    .logo-text { font-family: var(--mono); font-weight: 500; font-size: 15px; color: var(--text1); }
+    .logo-text span { color: var(--green); }
     .nav-badge {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--teal);
-      border: 1px solid var(--teal-dim);
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: var(--teal-bg);
+      font-family: var(--mono); font-size: 11px; color: var(--green);
+      border: 1px solid var(--border2); padding: 3px 10px;
+      border-radius: 20px; background: var(--green-bg);
     }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
-      text-align: center;
-      padding: 72px 24px 48px;
-      max-width: 680px;
-      margin: 0 auto;
+      text-align: center; padding: 72px 24px 48px;
+      max-width: 680px; margin: 0 auto;
     }
     .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--teal);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
+      font-family: var(--mono); font-size: 12px; color: var(--green);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
     }
     .hero h1 {
-      font-size: clamp(28px, 5vw, 46px);
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--text1);
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      font-size: clamp(28px, 5vw, 46px); font-weight: 600;
+      line-height: 1.2; color: var(--text1);
+      margin-bottom: 16px; letter-spacing: -0.02em;
     }
-    .hero h1 span {
-      color: var(--teal);
-    }
+    .hero h1 span { color: var(--green); }
     .hero p {
-      font-size: 16px;
-      color: var(--text2);
-      line-height: 1.7;
-      max-width: 500px;
-      margin: 0 auto 32px;
+      font-size: 16px; color: var(--text2); line-height: 1.7;
+      max-width: 500px; margin: 0 auto 32px;
     }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .stat-item {
-      text-align: center;
-    }
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--teal);
-      display: block;
-    }
-    .stat-label {
-      font-size: 12px;
-      color: var(--text3);
-    }
+    .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--green); display: block; }
+    .stat-label { font-size: 12px; color: var(--text3); }
 
-    /* ── MAIN TOOL ── */
-    .tool-section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
-
+    /* TOOL */
+    .tool-section { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
     .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 20px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px; margin-bottom: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
     }
-
     .card-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      font-family: var(--mono); font-size: 11px; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;
     }
-
     textarea {
-      width: 100%;
-      min-height: 200px;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      border-radius: 10px;
-      color: var(--text1);
-      font-family: var(--mono);
-      font-size: 13px;
-      line-height: 1.7;
-      padding: 16px;
-      resize: vertical;
-      outline: none;
-      transition: border-color 0.2s;
+      width: 100%; min-height: 200px;
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: 10px; color: var(--text1);
+      font-family: var(--mono); font-size: 13px; line-height: 1.7;
+      padding: 16px; resize: vertical; outline: none; transition: border-color 0.2s;
     }
-    textarea:focus {
-      border-color: var(--teal-dim);
-    }
-    textarea::placeholder {
-      color: var(--text3);
-    }
+    textarea:focus { border-color: var(--green-dim); }
+    textarea::placeholder { color: var(--text3); }
+    .hint { font-size: 12px; color: var(--text3); margin-top: 10px; font-family: var(--mono); }
+    .hint strong { color: var(--text2); }
 
-    .hint {
-      font-size: 12px;
-      color: var(--text3);
-      margin-top: 10px;
-      font-family: var(--mono);
-    }
-    .hint strong {
-      color: var(--text2);
-    }
-
-    /* ── BUTTONS ── */
-    .btn-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
+    /* BUTTONS */
+    .btn-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; align-items: center; }
     .btn {
-      padding: 11px 22px;
-      border-radius: 8px;
-      border: 1px solid var(--border2);
-      background: transparent;
-      color: var(--text2);
-      font-family: var(--sans);
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.18s;
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      padding: 11px 22px; border-radius: 8px;
+      border: 1px solid var(--border2); background: transparent;
+      color: var(--text2); font-family: var(--sans); font-size: 14px;
+      cursor: pointer; transition: all 0.18s;
+      display: flex; align-items: center; gap: 7px;
     }
-    .btn:hover {
-      background: var(--bg3);
-      color: var(--text1);
-      border-color: var(--border2);
-    }
-    .btn-primary {
-      background: var(--teal);
-      color: var(--bg);
-      border-color: var(--teal);
-      font-weight: 600;
-    }
-    .btn-primary:hover {
-      background: var(--teal-dim);
-      border-color: var(--teal-dim);
-      color: var(--bg);
-    }
-    .btn-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text3);
-      border-color: transparent;
-      font-size: 13px;
-    }
-    .btn-ghost:hover {
-      color: var(--text2);
-      background: transparent;
-    }
+    .btn:hover { background: var(--bg3); color: var(--text1); }
+    .btn-primary { background: var(--green); color: var(--bg); border-color: var(--green); font-weight: 600; }
+    .btn-primary:hover { background: var(--green-dim); border-color: var(--green-dim); color: var(--bg); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--text3); border-color: transparent; font-size: 13px; }
+    .btn-ghost:hover { color: var(--text2); background: transparent; }
 
-    /* ── PROGRESS ── */
-    .progress-wrap {
-      margin-top: 16px;
-      display: none;
-    }
-    .progress-track {
-      height: 3px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      background: var(--teal);
-      border-radius: 3px;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-    .progress-label {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text3);
-      margin-top: 8px;
-    }
+    /* PROGRESS */
+    .progress-wrap { margin-top: 16px; display: none; }
+    .progress-track { height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--green); border-radius: 3px; width: 0%; transition: width 0.3s ease; }
+    .progress-label { font-family: var(--mono); font-size: 12px; color: var(--text3); margin-top: 8px; }
 
-    /* ── SUMMARY STRIP ── */
-    .summary-strip {
-      display: none;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
+    /* SUMMARY */
+    .summary-strip { display: none; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
     .strip-item {
-      flex: 1;
-      min-width: 120px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 18px;
-      text-align: center;
+      flex: 1; min-width: 120px; background: var(--bg2);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 18px; text-align: center;
     }
-    .strip-num {
-      font-family: var(--mono);
-      font-size: 24px;
-      font-weight: 500;
-      display: block;
-    }
-    .strip-num.green { color: var(--teal); }
+    .strip-num { font-family: var(--mono); font-size: 24px; font-weight: 500; display: block; }
+    .strip-num.green { color: var(--green); }
     .strip-num.amber { color: var(--amber); }
     .strip-num.plain { color: var(--text2); }
-    .strip-lbl {
-      font-size: 12px;
-      color: var(--text3);
-      margin-top: 2px;
-      display: block;
-    }
+    .strip-lbl { font-size: 12px; color: var(--text3); margin-top: 2px; display: block; }
 
-    /* ── RESULT CARDS ── */
-    .results-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    /* RESULT CARDS */
+    .results-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .ref-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      transition: border-color 0.2s;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 20px; transition: border-color 0.2s;
     }
-    .ref-card.found {
-      border-color: rgba(0,201,167,0.3);
-    }
-    .ref-card.notfound {
-      border-color: rgba(255,179,71,0.2);
-    }
-    .ref-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .ref-index {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      white-space: nowrap;
-      margin-top: 2px;
-    }
-    .badge {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 2px 9px;
-      border-radius: 20px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .badge-searching {
-      background: var(--bg3);
-      color: var(--text3);
-      border: 1px solid var(--border2);
-    }
-    .badge-found {
-      background: var(--teal-bg);
-      color: var(--teal);
-      border: 1px solid rgba(0,201,167,0.3);
-    }
-    .badge-notfound {
-      background: var(--amber-bg);
-      color: var(--amber);
-      border: 1px solid rgba(255,179,71,0.3);
-    }
-    .ref-text {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text2);
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-    .doi-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .doi-link {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--teal);
-      text-decoration: none;
-      word-break: break-all;
-    }
-    .doi-link:hover {
-      text-decoration: underline;
-    }
-    .confidence-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 1px 7px;
-      border-radius: 4px;
-    }
-    .conf-high { background: rgba(0,201,167,0.12); color: var(--teal); }
-    .conf-medium { background: rgba(255,179,71,0.12); color: var(--amber); }
-    .conf-low { background: rgba(255,107,107,0.12); color: var(--red); }
-    .not-found-msg {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text3);
-    }
+    .ref-card.found { border-color: rgba(46,204,122,0.35); }
+    .ref-card.notfound { border-color: rgba(240,165,0,0.25); }
+    .ref-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+    .ref-index { font-family: var(--mono); font-size: 11px; color: var(--text3); white-space: nowrap; margin-top: 2px; }
+    .badge { font-family: var(--mono); font-size: 11px; padding: 2px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .badge-searching { background: var(--bg3); color: var(--text3); border: 1px solid var(--border2); }
+    .badge-found { background: var(--green-bg); color: var(--green); border: 1px solid rgba(46,204,122,0.3); }
+    .badge-notfound { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(240,165,0,0.3); }
+    .ref-text { font-family: var(--mono); font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+    .doi-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .doi-link { font-family: var(--mono); font-size: 12px; color: var(--green); text-decoration: none; word-break: break-all; }
+    .doi-link:hover { text-decoration: underline; }
+    .confidence-tag { font-family: var(--mono); font-size: 11px; padding: 1px 7px; border-radius: 4px; }
+    .conf-high { background: var(--green-bg); color: var(--green); }
+    .conf-medium { background: var(--amber-bg); color: var(--amber); }
+    .conf-low { background: var(--red-bg); color: var(--red); }
+    .not-found-msg { font-family: var(--mono); font-size: 12px; color: var(--text3); }
 
-    /* ── OUTPUT BOX ── */
-    .output-section {
-      display: none;
-    }
-    .output-section textarea {
-      min-height: 220px;
-      font-size: 12px;
-    }
-    .copy-success {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--teal);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
+    /* OUTPUT */
+    .output-section { display: none; }
+    .output-section textarea { min-height: 220px; font-size: 12px; }
+    .copy-success { font-family: var(--mono); font-size: 12px; color: var(--green); opacity: 0; transition: opacity 0.3s; }
     .copy-success.show { opacity: 1; }
 
-    /* ── HOW IT WORKS ── */
-    .how-section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
-    .how-title {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 24px;
-    }
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .step {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 22px;
-    }
-    .step-num {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--teal);
-      margin-bottom: 10px;
-      display: block;
-    }
-    .step h3 {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text1);
-      margin-bottom: 6px;
-    }
-    .step p {
-      font-size: 13px;
-      color: var(--text3);
-      line-height: 1.5;
-    }
+    /* HOW IT WORKS */
+    .how-section { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+    .how-title { font-family: var(--mono); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 24px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .step { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+    .step-num { font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 10px; display: block; }
+    .step h3 { font-size: 14px; font-weight: 500; color: var(--text1); margin-bottom: 6px; }
+    .step p { font-size: 13px; color: var(--text3); line-height: 1.5; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: gap;
-      gap: 12px;
+      border-top: 1px solid var(--border); padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; background: var(--bg2);
     }
-    footer p {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text3);
-    }
-    footer a {
-      color: var(--teal);
-      text-decoration: none;
-    }
+    footer p { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+    footer a { color: var(--green); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 0 40px 64px; }
 
-    /* ── DIVIDER ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 40px 64px;
-    }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 14px 20px; }
       .hero { padding: 48px 20px 32px; }
       .tool-section, .how-section { padding-left: 16px; padding-right: 16px; }
       .card { padding: 20px; }
       footer { padding: 20px; flex-direction: column; align-items: flex-start; }
-      .hero-stats { gap: 20px; }
     }
 
-    /* Loading dot animation */
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.2; }
-      40% { opacity: 1; }
-    }
-    .dots span {
-      animation: blink 1.2s infinite;
-      color: var(--teal);
-    }
+    @keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+    .dots span { animation: blink 1.2s infinite; color: var(--green); }
     .dots span:nth-child(2) { animation-delay: 0.2s; }
     .dots span:nth-child(3) { animation-delay: 0.4s; }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="logo" href="#">
     <div class="logo-icon">doi</div>
-    <span class="logo-text">DOI Finder</span>
+    <span class="logo-text">Find<span>My</span>DOI</span>
   </a>
   <span class="nav-badge">Powered by Crossref</span>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Free · No signup · Works instantly</p>
   <h1>Find <span>DOIs</span> for all your references — automatically</h1>
   <p>Paste your reference list in any format. We search 140+ million papers in the Crossref database and return the correct DOI for each one.</p>
   <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">140M+</span>
-      <span class="stat-label">Papers indexed</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">Any</span>
-      <span class="stat-label">Citation format</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">Free</span>
-      <span class="stat-label">Always & forever</span>
-    </div>
+    <div class="stat-item"><span class="stat-num">140M+</span><span class="stat-label">Papers indexed</span></div>
+    <div class="stat-item"><span class="stat-num">Any</span><span class="stat-label">Citation format</span></div>
+    <div class="stat-item"><span class="stat-num">Free</span><span class="stat-label">Always &amp; forever</span></div>
   </div>
 </section>
 
-<!-- MAIN TOOL -->
 <section class="tool-section">
-
-  <!-- Input card -->
   <div class="card" id="inputCard">
     <p class="card-label">Step 1 — Paste your references</p>
-    <textarea
-      id="refInput"
-      placeholder="Paste references here, one per line. Any format works — APA, MLA, Vancouver, numbered, unnumbered...
+    <textarea id="refInput" placeholder="Paste references here, one per line. Any format works — APA, MLA, Vancouver, numbered, unnumbered...
 
 Example:
-Smith JA, Brown T. Long-term effects of aerobic exercise on cognitive function. Lancet. 2020;395:1573–1580.
-LeCun Y, Bengio Y, Hinton G. Deep learning. Nature. 2015;521(7553):436–444.
-Kumar S et al. Antibiotic resistance mechanisms in gram-negative bacteria. J Infect Dis. 2019;220(8):1321–1332."
-    ></textarea>
-    <p class="hint"><strong>Tip:</strong> One reference per line. The more details in the reference (author, journal, year, pages), the more accurate the match.</p>
-
+Smith JA, Brown T. Long-term effects of aerobic exercise on cognitive function. Lancet. 2020;395:1573-1580.
+LeCun Y, Bengio Y, Hinton G. Deep learning. Nature. 2015;521(7553):436-444.
+Kumar S et al. Antibiotic resistance in gram-negative bacteria. J Infect Dis. 2019;220(8):1321-1332."></textarea>
+    <p class="hint"><strong>Tip:</strong> One reference per line. The more details (author, journal, year, pages), the more accurate the match.</p>
     <div class="btn-row">
       <button class="btn btn-primary" id="lookupBtn" onclick="startLookup()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         Find DOIs
       </button>
       <button class="btn" onclick="loadExample()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         Load example
       </button>
       <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
     </div>
-
-    <!-- Progress -->
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
-      <p class="progress-label" id="progressLabel">
-        Searching <span class="dots"><span>.</span><span>.</span><span>.</span></span>
-      </p>
+      <p class="progress-label" id="progressLabel">Searching <span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
     </div>
   </div>
 
-  <!-- Summary strip (shown after lookup) -->
   <div class="summary-strip" id="summaryStrip">
-    <div class="strip-item">
-      <span class="strip-num green" id="sFound">0</span>
-      <span class="strip-lbl">DOIs found</span>
-    </div>
-    <div class="strip-item">
-      <span class="strip-num amber" id="sNotFound">0</span>
-      <span class="strip-lbl">Not found (manual)</span>
-    </div>
-    <div class="strip-item">
-      <span class="strip-num plain" id="sTotal">0</span>
-      <span class="strip-lbl">Total references</span>
-    </div>
+    <div class="strip-item"><span class="strip-num green" id="sFound">0</span><span class="strip-lbl">DOIs found</span></div>
+    <div class="strip-item"><span class="strip-num amber" id="sNotFound">0</span><span class="strip-lbl">Not found (manual)</span></div>
+    <div class="strip-item"><span class="strip-num plain" id="sTotal">0</span><span class="strip-lbl">Total references</span></div>
   </div>
 
-  <!-- Result cards -->
   <div class="results-wrap" id="resultsWrap"></div>
 
-  <!-- Output box -->
   <div class="output-section" id="outputSection">
     <div class="card">
       <p class="card-label">Step 2 — Copy your updated references</p>
       <textarea id="outputText" readonly></textarea>
-      <div class="btn-row" style="align-items:center;">
+      <div class="btn-row">
         <button class="btn btn-primary" onclick="copyAll()">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           Copy all references
@@ -623,42 +288,22 @@ Kumar S et al. Antibiotic resistance mechanisms in gram-negative bacteria. J Inf
       </div>
     </div>
   </div>
-
 </section>
 
-<!-- DIVIDER -->
 <hr class="divider" />
 
-<!-- HOW IT WORKS -->
 <section class="how-section">
   <p class="how-title">How it works</p>
   <div class="steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <h3>Paste your list</h3>
-      <p>Any citation format is accepted — APA, MLA, Vancouver, numbered or plain text.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <h3>Crossref search</h3>
-      <p>Each reference is matched against 140M+ scholarly records using the Crossref API.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <h3>Confidence scored</h3>
-      <p>Every match gets a confidence score — High, Medium, or Low — so you know what to verify.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">04</span>
-      <h3>Copy and use</h3>
-      <p>Copy your updated reference list with DOIs included — ready for your manuscript.</p>
-    </div>
+    <div class="step"><span class="step-num">01</span><h3>Paste your list</h3><p>Any citation format accepted — APA, MLA, Vancouver, numbered or plain text.</p></div>
+    <div class="step"><span class="step-num">02</span><h3>Crossref search</h3><p>Each reference is matched against 140M+ scholarly records using the free Crossref API.</p></div>
+    <div class="step"><span class="step-num">03</span><h3>Confidence scored</h3><p>Every match gets a confidence score — High, Medium, or Low — so you know what to verify.</p></div>
+    <div class="step"><span class="step-num">04</span><h3>Copy and use</h3><p>Copy your updated reference list with DOIs — ready for your manuscript.</p></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>DOI Finder — free to use, no account needed.</p>
+  <p>FindMyDOI — free to use, no account needed.</p>
   <p>Metadata from <a href="https://www.crossref.org" target="_blank">Crossref</a> · Not affiliated with Crossref or any publisher.</p>
 </footer>
 
@@ -667,14 +312,11 @@ Kumar S et al. Antibiotic resistance mechanisms in gram-negative bacteria. J Inf
 LeCun Y, Bengio Y, Hinton G. Deep learning. Nature. 2015;521(7553):436-444.
 Kumar S, Singh R, Patel M. Antibiotic resistance mechanisms in gram-negative bacteria. Journal of Infectious Diseases. 2019;220(8):1321-1332.
 Vaswani A, Shazeer N, Parmar N et al. Attention is all you need. Advances in Neural Information Processing Systems. 2017;30.
-Re R, Pellegrini N, Proteggente A, Pannala A, Yang M, Rice-Evans C. Antioxidant activity applying an improved ABTS radical cation decolorization assay. Free Radical Biology and Medicine. 1999;26(9-10):1231-1237.`;
+Re R, Pellegrini N, Proteggente A et al. Antioxidant activity applying an improved ABTS radical cation decolorization assay. Free Radical Biology and Medicine. 1999;26(9-10):1231-1237.`;
 
-  let refResults = [];
-  let isRunning = false;
+  let refResults = [], isRunning = false;
 
-  function loadExample() {
-    document.getElementById('refInput').value = EXAMPLE;
-  }
+  function loadExample() { document.getElementById('refInput').value = EXAMPLE; }
 
   function clearAll() {
     document.getElementById('refInput').value = '';
@@ -683,47 +325,32 @@ Re R, Pellegrini N, Proteggente A, Pannala A, Yang M, Rice-Evans C. Antioxidant 
     document.getElementById('summaryStrip').style.display = 'none';
     document.getElementById('progressWrap').style.display = 'none';
     document.getElementById('progressLabel').innerHTML = 'Searching <span class="dots"><span>.</span><span>.</span><span>.</span></span>';
-    refResults = [];
-    isRunning = false;
+    refResults = []; isRunning = false;
     document.getElementById('lookupBtn').disabled = false;
   }
 
   function parseRefs(text) {
-    return text.split('\n')
-      .map(l => l.trim())
-      .filter(l => l.length > 20);
+    return text.split('\n').map(l => l.trim()).filter(l => l.length > 20);
   }
 
   async function fetchDOI(ref) {
-    const q = encodeURIComponent(ref.replace(/['"]/g, '').replace(/^\[\d+\]\s*/, '').replace(/^\d+\.\s*/, '').substring(0, 230));
+    const q = encodeURIComponent(ref.replace(/['"]/g,'').replace(/^\[\d+\]\s*/,'').replace(/^\d+\.\s*/,'').substring(0,230));
     const url = `https://api.crossref.org/works?query.bibliographic=${q}&rows=1&select=DOI,title,score`;
     try {
-      const res = await fetch(url, {
-        headers: { 'User-Agent': 'DOIFinderWebsite/1.0 (https://github.com)' }
-      });
+      const res = await fetch(url, { headers: { 'User-Agent': 'FindMyDOI/1.0' } });
       const data = await res.json();
       const items = data?.message?.items;
-      if (items && items.length > 0 && items[0].score > 28) {
-        return { doi: items[0].DOI, score: items[0].score };
-      }
+      if (items && items.length > 0 && items[0].score > 28) return { doi: items[0].DOI, score: items[0].score };
       return null;
-    } catch (e) {
-      return null;
-    }
+    } catch(e) { return null; }
   }
 
   async function startLookup() {
     if (isRunning) return;
     const text = document.getElementById('refInput').value.trim();
-    if (!text) {
-      alert('Please paste some references first.');
-      return;
-    }
+    if (!text) { alert('Please paste some references first.'); return; }
     const refs = parseRefs(text);
-    if (refs.length === 0) {
-      alert('No valid references found. Make sure each reference is on its own line.');
-      return;
-    }
+    if (refs.length === 0) { alert('No valid references found. Make sure each reference is on its own line.'); return; }
 
     isRunning = true;
     document.getElementById('lookupBtn').disabled = true;
@@ -737,105 +364,70 @@ Re R, Pellegrini N, Proteggente A, Pannala A, Yang M, Rice-Evans C. Antioxidant 
     const wrap = document.getElementById('resultsWrap');
     refs.forEach((ref, i) => {
       const card = document.createElement('div');
-      card.className = 'ref-card';
-      card.id = 'rc-' + i;
+      card.className = 'ref-card'; card.id = 'rc-' + i;
       card.innerHTML = `
         <div class="ref-header">
-          <span class="ref-index">Ref ${i + 1} / ${refs.length}</span>
+          <span class="ref-index">Ref ${i+1} / ${refs.length}</span>
           <span class="badge badge-searching" id="badge-${i}">searching</span>
         </div>
-        <div class="ref-text">${escHtml(ref.substring(0, 200))}${ref.length > 200 ? '…' : ''}</div>
-        <div class="doi-row" id="doi-row-${i}">
-          <span style="font-family:var(--mono);font-size:12px;color:var(--text3);">waiting...</span>
-        </div>`;
+        <div class="ref-text">${escHtml(ref.substring(0,200))}${ref.length>200?'…':''}</div>
+        <div class="doi-row" id="doi-row-${i}"><span style="font-family:var(--mono);font-size:12px;color:var(--text3);">waiting...</span></div>`;
       wrap.appendChild(card);
       refResults.push({ ref, doi: null });
     });
 
     let foundCount = 0;
-
     for (let i = 0; i < refs.length; i++) {
-      const pct = ((i + 1) / refs.length * 100).toFixed(0);
+      const pct = ((i+1)/refs.length*100).toFixed(0);
       document.getElementById('progressBar').style.width = pct + '%';
-      document.getElementById('progressLabel').innerHTML =
-        `Searching ${i + 1} of ${refs.length} <span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
-
-      const card = document.getElementById('rc-' + i);
-      const badge = document.getElementById('badge-' + i);
-      const doiRow = document.getElementById('doi-row-' + i);
-
-      badge.className = 'badge badge-searching';
-      badge.textContent = 'searching';
-
+      document.getElementById('progressLabel').innerHTML = `Searching ${i+1} of ${refs.length} <span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
+      const badge = document.getElementById('badge-'+i);
+      const doiRow = document.getElementById('doi-row-'+i);
+      const card = document.getElementById('rc-'+i);
+      badge.className = 'badge badge-searching'; badge.textContent = 'searching';
       const result = await fetchDOI(refs[i]);
-
       if (result) {
-        refResults[i].doi = result.doi;
-        foundCount++;
+        refResults[i].doi = result.doi; foundCount++;
         card.classList.add('found');
-        badge.className = 'badge badge-found';
-        badge.textContent = '✓ found';
-
+        badge.className = 'badge badge-found'; badge.textContent = '✓ found';
         const conf = result.score > 80 ? 'High' : result.score > 45 ? 'Medium' : 'Low';
         const confClass = result.score > 80 ? 'conf-high' : result.score > 45 ? 'conf-medium' : 'conf-low';
-
-        doiRow.innerHTML = `
-          <a class="doi-link" href="https://doi.org/${result.doi}" target="_blank" rel="noopener">https://doi.org/${result.doi}</a>
-          <span class="confidence-tag ${confClass}">Confidence: ${conf}</span>`;
+        doiRow.innerHTML = `<a class="doi-link" href="https://doi.org/${result.doi}" target="_blank" rel="noopener">https://doi.org/${result.doi}</a><span class="confidence-tag ${confClass}">Confidence: ${conf}</span>`;
       } else {
         card.classList.add('notfound');
-        badge.className = 'badge badge-notfound';
-        badge.textContent = '⚠ not found';
+        badge.className = 'badge badge-notfound'; badge.textContent = '⚠ not found';
         doiRow.innerHTML = `<span class="not-found-msg">DOI not found — please verify manually</span>`;
       }
-
       await new Promise(r => setTimeout(r, 380));
     }
 
-    // Summary
-    const sStrip = document.getElementById('summaryStrip');
     document.getElementById('sFound').textContent = foundCount;
     document.getElementById('sNotFound').textContent = refs.length - foundCount;
     document.getElementById('sTotal').textContent = refs.length;
-    sStrip.style.display = 'flex';
+    document.getElementById('summaryStrip').style.display = 'flex';
+    document.getElementById('progressLabel').innerHTML = `Done! Found DOIs for <strong style="color:var(--green)">${foundCount}</strong> of ${refs.length} references.`;
 
-    document.getElementById('progressLabel').innerHTML =
-      `Done! Found DOIs for <strong style="color:var(--teal)">${foundCount}</strong> of ${refs.length} references.`;
-
-    // Build output
-    const output = refResults.map((r, i) => {
-      const doi = r.doi ? `\n   DOI: https://doi.org/${r.doi}` : `\n   DOI: [Not found — verify manually]`;
-      return `${r.ref}${doi}`;
-    }).join('\n\n');
+    const output = refResults.map(r => `${r.ref}${r.doi ? '\n   DOI: https://doi.org/'+r.doi : '\n   DOI: [Not found — verify manually]'}`).join('\n\n');
     document.getElementById('outputText').value = output;
     document.getElementById('outputSection').style.display = 'block';
     document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
     isRunning = false;
     document.getElementById('lookupBtn').disabled = false;
   }
 
   function copyAll() {
     const ta = document.getElementById('outputText');
-    ta.select();
-    document.execCommand('copy');
-    showCopySuccess();
+    ta.select(); document.execCommand('copy'); showCopySuccess();
   }
-
   function copyFoundOnly() {
-    const text = refResults
-      .filter(r => r.doi)
-      .map(r => `${r.ref}\nDOI: https://doi.org/${r.doi}`)
-      .join('\n\n');
+    const text = refResults.filter(r => r.doi).map(r => `${r.ref}\nDOI: https://doi.org/${r.doi}`).join('\n\n');
     navigator.clipboard.writeText(text).then(showCopySuccess);
   }
-
   function showCopySuccess() {
     const el = document.getElementById('copySuccess');
     el.classList.add('show');
     setTimeout(() => el.classList.remove('show'), 2500);
   }
-
   function escHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
